@@ -1,0 +1,115 @@
+GIT COMMANDS USED IN THIS ASSIGNMENT
+====================================
+
+--- Step 1: Local Repository Setup ---
+
+mkdir my-website
+    Creates a new project folder on the local machine.
+
+cd my-website
+    Moves into the project folder so all Git commands run inside it.
+
+git init
+    Initializes an empty Git repository by creating a hidden .git folder.
+
+git config --global user.name "Sayanendu Pramanik"
+git config --global user.email "2024eb02310@online.bits-pilani.ac.in"
+    Sets the author name and email recorded in every commit.
+
+--- Step 2: Git Workflow Execution ---
+
+git status
+    Shows which files are untracked, modified, or staged for the next commit.
+
+git add index.html about.html
+    Stages the two HTML files so they are included in the next commit.
+
+git commit -m "Initial commit: add index.html and about.html"
+    Records a snapshot of the staged files with a descriptive message.
+
+git branch -M main
+    Renames the current branch to "main" (needed if Git defaulted to "master").
+
+git add index.html
+git commit -m "Update index.html with welcome paragraph"
+    Stages and commits the modification to index.html (second commit).
+
+git branch feature
+    Creates a new branch named "feature" pointing at the current commit.
+
+git checkout feature
+    Switches the working directory to the "feature" branch.
+    (Equivalent modern command: git switch feature)
+
+git add about.html
+git commit -m "Feature: add team section to about.html"
+    Commits the change made on the feature branch only.
+
+git checkout main
+    Switches back to the main branch; feature-branch changes are not visible here yet.
+
+git merge --no-ff feature -m "Merge branch 'feature' into main"
+    Merges the feature branch into main; --no-ff forces a merge commit so the
+    branch activity is clearly visible in the history.
+
+git log --oneline --graph --all
+    Displays the full commit history as a compact graph showing all branches and the merge.
+
+git branch
+    Lists all local branches and marks the current one with *.
+
+--- Step 3: .gitignore Implementation ---
+
+echo "*.log" > .gitignore
+echo "temp/" >> .gitignore
+    Creates .gitignore so Git ignores all .log files and the temp/ folder.
+
+mkdir temp
+echo "debug" > app.log
+echo "scratch" > temp/notes.txt
+    Creates test files that should be ignored, to prove .gitignore works.
+
+git status
+    Confirms app.log and temp/ do NOT appear as untracked files.
+
+git add .gitignore
+git commit -m "Add .gitignore for log files and temp folder"
+    Commits the .gitignore file to the repository.
+
+--- Step 4: Undo Operation ---
+
+git add contact.html
+git commit -m "Add contact page (to be undone)"
+    Makes an additional commit that will be undone.
+
+git log --oneline
+    Shows the history before the undo, with the extra commit on top.
+
+git reset --hard HEAD~1
+    Undoes the last commit: moves the branch back one commit and discards its changes.
+    (Use --soft instead to keep the changes staged.)
+
+git log --oneline
+git status
+    Shows the extra commit is gone and the working tree is clean.
+
+--- Step 5: GitHub Integration ---
+
+git remote add origin https://github.com/RAj5517/my-website.git
+    Links the local repository to the empty public GitHub repository.
+
+git remote -v
+    Verifies the remote URL for fetch and push.
+
+git push -u origin main
+    Uploads the main branch and its full history to GitHub and sets it as upstream.
+
+git push origin feature
+    Uploads the feature branch so branch activity is also visible on GitHub.
+
+--- Step 6: Documentation ---
+
+git add git_commands.txt
+git commit -m "Add git command documentation"
+git push
+    Commits this documentation file and pushes it to GitHub.
